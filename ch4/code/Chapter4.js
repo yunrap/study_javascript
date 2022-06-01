@@ -186,21 +186,71 @@
 //4-23
 
 //myObject 객체 생성
+// var myObject = {
+//   name: "foo",
+//   sayName: function () {
+//     console.log(this.name);
+//   },
+// };
+
+//otherObject 객체 생성
+// var otherObject = {
+//   name: "bar",
+// };
+
+// // otherObaject.sayName() 메서드
+// otherObject.sayName = myObject.sayName;
+
+// // sayName() 메서드 호출
+// myObject.sayName();
+// otherObject.sayName();
+
+//4-24
+// 전역 객체와 전역 변수의 관계를 보여주는 예제코드
+// var foo = "i'm foo";
+
+// console.log(foo);
+// console.log(window.foo);
+
+//4-25
+//함수를 호출할 때 this바인딩을 보여주는 예제 코드
+// var test = "this is test";
+// console.log(window.test); //window에서 가능
+
+// //sayFoo() 함수
+// var sayFoo = function () {
+//   console.log(this.test);
+// };
+// sayFoo();
+
+//4-26
+//내부 함수의 this 바인딩 동작을 보여주는 예제 코드
+//전역 변수 value 의 정의
+var value = 100;
+
+//myObject 객체 생성
 var myObject = {
-  name: "foo",
-  sayName: function () {
-    console.log(this.name);
+  value: 1,
+  func1: function () {
+    this.value += 1;
+    console.log("func1() called" + this.value); //101
+    //func2() 내부 함수
+    func2 = function () {
+      this.value += 1;
+      console.log("func2() called" + this.value);
+
+      func3 = function () {
+        this.value += 1;
+        console.log("func3() called" + this.value);
+      };
+
+      func3();
+    };
+
+    func2();
   },
 };
 
-//otherObject 객체 생성
-var otherObject = {
-  name: "bar",
-};
+myObject.func1();
 
-// otherObaject.sayName() 메서드
-otherObject.sayName = myObject.sayName;
-
-// sayName() 메서드 호출
-myObject.sayName();
-otherObject.sayName();
+//자꾸 헷갈리는건,함수호출이 일어나고 실행되야하는것...이부분주의
