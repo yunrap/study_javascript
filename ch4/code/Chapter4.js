@@ -226,31 +226,60 @@
 //4-26
 //내부 함수의 this 바인딩 동작을 보여주는 예제 코드
 //전역 변수 value 의 정의
+// var value = 100;
+
+// //myObject 객체 생성
+// var myObject = {
+//   value: 1,
+//   func1: function () {
+//     this.value += 1;
+//     console.log("func1() called" + this.value); //2
+//     //func2() 내부 함수
+//     func2 = function () {
+//       this.value += 1;
+//       console.log("func2() called" + this.value); //3
+
+//       func3 = function () {
+//         this.value += 1;
+//         console.log("func3() called" + this.value); //4
+//       };
+
+//       func3(); //func3() 함수 호출
+//     };
+
+//     func2(); //func2() 함수 호출
+//   },
+// };
+
+// myObject.func1(); //func1() 메서드 호출
+
+//4-27 내부 함수의 this바인딩 문제를 해결한 코드
+
 var value = 100;
 
-//myObject 객체 생성
 var myObject = {
   value: 1,
   func1: function () {
-    this.value += 1;
-    console.log("func1() called" + this.value); //101
-    //func2() 내부 함수
-    func2 = function () {
-      this.value += 1;
-      console.log("func2() called" + this.value);
+    console.log(this);
+    var that = this;
+
+    that.value += 1;
+    console.log("func1() caleed" + that.value); // 2 출력
+
+    (func2 = function () {
+      that.value += 1;
+      console.log("func2() caleed" + that.value);
 
       func3 = function () {
-        this.value += 1;
-        console.log("func3() called" + this.value);
+        that.value += 1;
+        console.log("func3() caleed" + that.value);
       };
-
       func3();
-    };
-
-    func2();
+    }),
+      func2();
   },
 };
 
 myObject.func1();
 
-//자꾸 헷갈리는건,함수호출이 일어나고 실행되야하는것...이부분주의
+//refenrece를 사용한 호출시 this 문제 해결
