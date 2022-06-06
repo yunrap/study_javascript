@@ -1,3 +1,13 @@
+/****************************************/
+//3-5 object() 생성자 함수를 통한 객체 생성
+/* var foo = new Object();
+
+//foo객체 프로퍼티 생성
+foo.name = "yeji";
+foo.age = 28;
+foo.gender = "female";
+console.log(typeof foo);
+console.log(foo); */
 //4-2
 // var add = function (x, y) {
 //   return x + y;
@@ -255,7 +265,7 @@
 
 //4-27 내부 함수의 this바인딩 문제를 해결한 코드
 
-var value = 100;
+/* var value = 100;
 
 var myObject = {
   value: 1,
@@ -280,6 +290,229 @@ var myObject = {
   },
 };
 
-myObject.func1();
+myObject.func1(); */
 
 //refenrece를 사용한 호출시 this 문제 해결
+
+//4-28 생성자 함수의 동작 방식
+/* var Person = function (name) {
+  //함수 코드 실행전
+  this.name = name;
+  //함수 리턴
+};
+
+//foo 객체 생성
+var foo = new Person("foo");
+console.log(foo.name); */
+
+//4-29 객체 생성 두가지방법(객체리터럴 vs 생성자함수)
+
+//객체 리터럴 방식으로 foo 객체 생성
+/* var foo = {
+  name: "foo",
+  age: 35,
+  gender: "man",
+};
+console.dir(foo);
+
+//생성자 함수
+function Person(name, age, gender, position) {
+  this.name = name;
+  this.age = age;
+  this.gender = gender;
+  this.position = position;
+}
+
+//Person 생성자 함수를 이용해 bar객체, baz 객체 생성
+var bar = new Person("bar", 33, "woman");
+console.log(bar);
+
+var baz = new Person("baz", 28, "woman");
+console.dir(baz); */
+
+/****************************************/
+//4-31 apply() 메서드를 이용한 명시적인 this 바인딩
+
+//생성자 함수
+/* function Person(name, age, gender) {
+  this.name = name;
+  this.age = age;
+  this.gender = gender;
+}
+
+//foo 빈 객체 생성
+var foo = {};
+
+//apply() 메서드 호출
+Person.apply(foo, ["foo", 30, "man"]);
+console.dir(foo);
+ */
+
+/****************************************/
+//4-32 apply()메서드를 활용한 arguments 객체의 메서드 slice() 활용코드
+/* function myFunction() {
+  console.dir(arguments);
+
+  // arguments.shift(); 에러 발생
+
+  //arguments 객체를 배열로 변환
+  var args = Array.prototype.slice.apply(arguments);
+  console.dir(args);
+}
+
+myFunction(1, 2, 3); */
+
+/****************************************/
+//4-33 slice() 메서드 사용 예제코드
+/* var arrA = [1, 2, 3];
+var arrB = arrA.slice(0); // [1,2,3]
+var arrC = arrA.slice(); // [1,2,3]
+var arrD = arrA.slice(1); // [2,3]
+var arrE = arrA.slice(1, 2); //[2] */
+
+/****************************************/
+//4-34 return 문 없는 일반 함수의 리턴값 확인
+//noReturnFunc() 함수
+/* var noReturnFunc = () => {
+  //es6로 작성 arrow function
+  console.log("no return function");
+};
+
+var result = noReturnFunc();
+console.log(result); */
+
+/****************************************/
+//4-35 생성자 함수에서 명시적으로 객체를 리턴했을 경우
+
+//Person() 생성자 함수
+/* function Person(name, age, gender) {
+  this.name = name;
+  this.age = age;
+  this.gender = gender;
+
+  //명시적으로 다른 객체 반환
+  return { name: "bar", age: 20, gender: "women" };
+}
+
+var foo = new Person("foo", 28, "women");
+console.dir(foo); */
+
+/****************************************/
+//4-36 생성자 함수에서 명시적으로 기본타입(불린, 숫자, 문자열)값을 리턴했을 경우
+/* function Person(name, age, gender) {
+  this.name = name;
+  this.age = age;
+  this.gender = gender;
+
+  return 100;
+}
+
+var foo = new Person("foo", 28, "women");
+console.log(foo); */
+
+/****************************************/
+// 4-37 prototype 프로퍼티와 [[Prototype]] 링크 구분
+// Person 생성자 함수
+/* function Person(name) {
+  this.name = name;
+}
+
+//foo 객체 생성
+var foo = new Person("foo");
+
+console.dir(Person);
+console.dir(foo); */
+
+/****************************************/
+// 4-38 객체 리터럴 방식에서의 프로토타입 체이닝
+/* var myObject = {
+  name: "yeji",
+  sayName: function () {
+    console.log("my name is : " + this.name);
+  },
+};
+
+myObject.sayName();
+console.log(myObject.hasOwnProperty("name"));
+console.log(myObject.hasOwnProperty("nickName")); //에러
+myObject.sayNickName(); */
+
+/****************************************/
+//4-39 생성자 함수 방식에서의 프로토아입 체이닝
+//Person() 생성자 함수
+/* function Person(name, age, hobby) {
+  this.name = name;
+  this.age = age;
+  this.hobby = hobby;
+}
+
+//foo객체 생성
+var foo = new Person("foo", 28, "health");
+
+//프로토타입 체이닝
+console.log(foo.hasOwnProperty("name"));
+
+//Person.prototype 객체 출력
+console.dir(Person.prototype); */
+
+/****************************************/
+//5-1
+/* console.log("global context"); //1.전역컨텍스트 실행
+
+function ExContext1() {
+  console.log("context1"); //4. 실행
+}
+
+function ExContext2() {
+  ExContext1(); //3. 호출
+  console.log("context2"); //5. 실행
+}
+ExContext2(); // 2. 호출 */
+
+/****************************************/
+//5-2
+/* function execute(param1, param2) {
+  var a = 1;
+  b = 2;
+  function func() {
+    return a + b;
+  }
+  return param1 + param2 + func();
+}
+
+execute(3, 4); */
+
+/****************************************/
+//5-4
+/* 
+var var1 = 1;
+var var2 = 2;
+function func() {
+  var var1 = 10;
+  var var2 = 20;
+  console.log(var1);
+  console.log(var2);
+}
+
+func();
+console.log(var1);
+console.log(var2); */
+
+/****************************************/
+//5-5
+
+/* var value = "oneValue";
+
+function printFunc() {
+  var value = "twoValue";
+
+  function printValue() {
+    return value;
+  }
+
+  console.log(printValue);
+}
+printFunc(); */
+
+/****************************************/
+//5-6
