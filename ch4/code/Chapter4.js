@@ -516,3 +516,57 @@ printFunc(); */
 
 /****************************************/
 //5-6
+/* var value = "value1";
+
+function printValue() {
+  return value;
+}
+
+function printFunc(func) {
+  var value = "value2";
+  console.log(value);
+}
+
+printFunc(printValue); */
+
+/****************************************/
+//함수호이스팅
+/* 
+foo();
+bar();
+
+var foo = function () {
+  console.log("foo" + x);
+};
+
+var bar = function () {
+  console.log("bar" + x);
+};
+
+var x = 1; */
+
+/****************************************/
+//클로저
+function outerFunc() {
+  var x = 10;
+  var innerFunc = function () {
+    console.log(x);
+  };
+  return innerFunc;
+
+  var inner = outerFunc();
+  inner();
+}
+
+const obj = {
+  a: "hi",
+  b: function () {
+    return () => console.log(this.a);
+  },
+  c: function () {
+    console.log(this.a);
+  },
+};
+
+obj.b();
+obj.c();
