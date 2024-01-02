@@ -1,0 +1,16 @@
+let santa = false; // 전역 컨텍스트
+var rudolf = false;
+function christmas() {
+  let santa = true;
+
+  function givePresent() {
+    let gift = "cat";
+    console.log(gift); // cat
+    console.log(santa); // false
+    console.log(rudolf); // false
+  }
+
+  givePresent();
+}
+
+christmas();
