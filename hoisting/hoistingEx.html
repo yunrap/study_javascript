@@ -1,0 +1,30 @@
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<body>
+       <input type="button" id="i_button_01" value="button_01" />     <input
+    type="button"
+    onclick="doFunc();"
+    value="button_02"
+  />
+</body>
+<script>
+  $(document).ready(function () {
+    $("#i_button_01").click(function () {
+      console.log("click button");
+    });
+
+    function doFunc() {
+      console.log("확인");
+    }
+
+    // var doFunc = () => {};
+  });
+</script>
+
+<!-- 1. $(document).ready는 페이지가 모두 완료되었을때 실행하는 콜백 함수를 받습니다.
+2. $(document).ready 바깥은 전역(글로벌) 스코프에 속합니다. 따라서 여기에 정의한 모든 프로퍼티는 window에 할당됩니다.
+3. $(document).ready는 콜백 함수를 실행하므로 함수 스코프를 생성합니다. 함수 실행 종료와 함께 스코프가 파괴됩니다. 
+  따라서 <input type="button" onclick="doFunc();" value="button_02"> 여기 사용한 함수는 실행되지 않습니다. doFunc가 전역 스코프에 존재하지 않기 때문입니다.
+4. $(document).ready 안에서 var 키워드 없이 함수 doFunc를 정의했을때, doFunc를 상위 스코프에서 찾습니다. 
+  상위스코프는 전역 window 객체인데, 없으니 동적 할당해서 doFunc를 window에 할당합니다. 
+  만약 $(document).ready 위에 외부 함수가 있고 거기에 지역변수 doFunc 있었다면 그 지역변수 doFunc에 함수를 할당했을 겁니다.
+5. 4의 결과로 <input type="button" onclick="doFunc();" value="button_02">에서 doFunc를 찾을때 전역에서 바로 찾을 수 있습니다. -->
